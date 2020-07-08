@@ -1,5 +1,5 @@
 import React, {useEffect,useState} from 'react';
-import { View, Text, StyleSheet, StatusBar } from 'react-native';
+import { View, Text, StyleSheet, StatusBar, FlatList } from 'react-native';
 import api from './services/api';
 
 export default function App() {
@@ -10,22 +10,23 @@ export default function App() {
     return (
         <>
             <StatusBar barStyle="light-content" backgroundColor="#7159C1"/>
-            <View style={styles.container}>
-                {projects.map(project=>(
-                <Text style={styles.project} key={project.id}>{project.title}</Text>))}
-                <Text style={styles.title}>Hello GoStack</Text>
-            </View>;
+
+            <FlatList
+            style={styles.container}
+            data={projects}
+            keyExtractor={project=>project.id}
+            renderItem={({item: project})=>(
+                <Text style={styles.project}>{project.title}</Text>
+            )}
+            />          
         </>
-    )
+    );
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#7159C1',
-        justifyContent: 'center',
-        alignItems: 'center'
-
+        backgroundColor: '#7159C1'
     },
     title: {
         color: '#FFF',
