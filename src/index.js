@@ -5,7 +5,7 @@ import api from './services/api';
 export default function App() {
 
     const [projects, setProjects] = useState([]);
-    useEffect(()=>{api.get('projects').then(response=>{console.log(response.data)})},[])
+    useEffect(()=>{api.get('projects').then(response=>{setProjects(response.data)})},[])
 
     return (
         <>
